@@ -1,0 +1,14 @@
+@import 'core';
+
+.scoreboard {
+  border: 1px solid black;
+  margin: 0 auto;
+  margin-top: 3%;
+  width: 200px;
+  height: 150px;
+  text-align: center;
+
+  .win-count {
+    padding-bottom: 3%;
+  }
+}

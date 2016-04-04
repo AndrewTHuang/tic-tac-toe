@@ -1,0 +1,24 @@
+@import 'core';
+
+.game {
+  padding-top: 5%;
+}
+
+.board {
+  width: 600px;
+  height: 600px;
+  outline: 1px solid black;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.tile {
+  outline: 1px solid black;
+  width: 200px;
+  height: 200px;
+  float: left;
+  font-size: 200px;
+  text-align: center;
+  line-height: 200px;
+}
