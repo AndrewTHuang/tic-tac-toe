@@ -10,9 +10,9 @@ export default class App extends React.Component {
 
     this.state = {
       tiles: [
-        '', '', '',
-        '', '', '',
-        '', '', ''
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
       ],
       turn: 'X',
       winner: null,
