@@ -1,24 +1,26 @@
-@import 'core';
-
 .game {
   padding-top: 5%;
 }
 
 .board {
-  width: 600px;
-  height: 600px;
+  width: 60vh;
+  height: 60vh;
   outline: 1px solid black;
   margin: 0 auto;
   text-align: center;
   position: relative;
 }
 
+.tile-container {
+  height: 33.33333%;
+}
+
 .tile {
   outline: 1px solid black;
-  width: 200px;
-  height: 200px;
+  width: 33.33333%;
+  height: 100%;
   float: left;
-  font-size: 200px;
+  font-size: 20vh;
   text-align: center;
-  line-height: 200px;
+  line-height: 20vh;
 }

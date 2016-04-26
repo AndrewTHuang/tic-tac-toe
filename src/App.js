@@ -2,7 +2,7 @@ import React      from 'react';
 import Board      from './components/Board';
 import GameOver   from './components/GameOver';
 import Scoreboard from './components/Scoreboard';
-import styles     from './styles/Board.scss';
+import styles     from './styles/styles.scss';
 
 export default class App extends React.Component {
   constructor(props) {

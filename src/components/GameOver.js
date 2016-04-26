@@ -1,5 +1,5 @@
 import React  from 'react';
-import styles from '../styles/GameOver.scss';
+import styles from '../styles/styles.scss';
 
 export default class GameOver extends React.Component {
   render() {

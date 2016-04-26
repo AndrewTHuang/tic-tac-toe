@@ -1,5 +1,5 @@
 import React  from 'react';
-import styles from '../styles/Scoreboard.scss';
+import styles from '../styles/styles.scss';
 
 export default class Scoredboard extends React.Component {
   render() {
