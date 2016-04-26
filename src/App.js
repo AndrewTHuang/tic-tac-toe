@@ -1,4 +1,5 @@
 import React      from 'react';
+import _          from 'underscore';
 import Board      from './components/Board';
 import GameOver   from './components/GameOver';
 import Scoreboard from './components/Scoreboard';
@@ -10,9 +11,9 @@ export default class App extends React.Component {
 
     this.state = {
       tiles: [
-        '', '', '',
-        '', '', '',
-        '', '', ''
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
       ],
       turn: 'X',
       winner: null,
@@ -38,61 +39,68 @@ export default class App extends React.Component {
 
   checkRows() {
     let tiles = this.state.tiles;
-    this.check(tiles[0], tiles[1], tiles[2]);
-    this.check(tiles[3], tiles[4], tiles[5]);
-    this.check(tiles[6], tiles[7], tiles[8]);
+    tiles.forEach(row => {
+      this.check(row[0], row[1], row[2]);
+    })
   }
 
   checkColumns() {
     let tiles = this.state.tiles;
-    this.check(tiles[0], tiles[3], tiles[6]);
-    this.check(tiles[1], tiles[4], tiles[7]);
-    this.check(tiles[2], tiles[5], tiles[8]);
+    // Assuming a square grid, we can equate number of rows (tiles.length) with number of columns
+    for (var i = 0; i < tiles.length; i++) {
+      this.check(tiles[0][i], tiles[1][i], tiles[2][i]);
+    }
   }
 
   checkDiagonals() {
     let tiles = this.state.tiles;
-    this.check(tiles[0], tiles[4], tiles[8]);
-    this.check(tiles[2], tiles[4], tiles[6]);
+    this.check(tiles[0][0], tiles[1][1], tiles[2][2]);
+    this.check(tiles[0][2], tiles[1][1], tiles[2][0]);
+  }
+
+  checkDraw() {
+    let tiles = this.state.tiles;
+    let flatBoard = _.flatten(tiles);
+
+    if (!_.contains(flatBoard, '')) {
+      this.setState({winner: 'No one'});
+    };
   }
 
   checkBoard() {
     this.checkRows();
     this.checkColumns();
     this.checkDiagonals();
+    this.checkDraw();
   }
 
-  tileClick(position) {
+  tileClick(tileIndex, rowIndex) {
     let tiles = this.state.tiles;
     let turn = this.state.turn;
 
-    tiles.map(tile => {
-      // Don't allow player to overwrite occupied tile
-      if (tiles[position] === '') {
-        tiles[position] = turn;
+    tiles.forEach(row => {
+      row.map(tile => {
+          // Don't allow player to overwrite occupied tile
+        if (tiles[rowIndex][tileIndex] === '') {
+          tiles[rowIndex][tileIndex] = turn;
 
-        // End game if there's a draw
-        if (tiles.indexOf('') === -1) {
-          this.setState({winner: 'No one'})
+          // Re-render the board and toggle turn
+          this.setState({
+            tiles: tiles,
+            turn: turn === 'X' ? 'O' : 'X'
+          })
         }
-
-        // Re-render the board and toggle turn
-        this.setState({
-          tiles: tiles,
-          turn: turn === 'X' ? 'O' : 'X'
-        })
-      }
+      })
+      this.checkBoard();
     })
-
-    this.checkBoard();
   }
 
   resetGame() {
     this.setState({
       tiles: [
-        '', '', '',
-        '', '', '',
-        '', '', ''
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
       ],
       turn: 'X',
       winner: null

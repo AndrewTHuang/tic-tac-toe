@@ -5,18 +5,24 @@ export default class Board extends React.Component {
   render() {
     let tiles = this.props.tiles;
 
-    let board = tiles.map((tile, index) => {
-      return <div
-                className='tile'
-                key={index}
-                onClick={this.props.tileClick.bind(this, index)}
-              >
-                { tile }
-              </div>
-    });
+    let board = tiles.reduce((newBoard, row, rowIndex) => {
+      let rowTiles = row.map((tile, tileIndex) => {
+        // Refer to individual tiles by index (0-8)
+        let position = rowIndex * 3 + tileIndex;
+        return <div
+                  className='tile'
+                  key={position}
+                  onClick={this.props.tileClick.bind(this, tileIndex, rowIndex)}
+                >
+                  { tile }
+                </div>
+      })
+      return [...newBoard, ...rowTiles];
+
+    }, []);
 
     return (
-      <div className='tile-container'>
+      <div>
         { board }
       </div>
     );

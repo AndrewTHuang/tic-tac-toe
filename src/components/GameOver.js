@@ -11,7 +11,7 @@ export default class GameOver extends React.Component {
           <h1 className='winner-message'>{this.props.winner} wins!</h1>
           : null
         }
-        <button className='reset-btn' onClick={this.props.resetGame} >Start a New Game</button>
+        <button className='reset-btn' onClick={this.props.resetGame}>Start a New Game</button>
       </div>
     );
   }
